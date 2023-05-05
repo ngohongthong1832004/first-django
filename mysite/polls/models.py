@@ -17,3 +17,14 @@ class Choice(models.Model):
     votes = models.IntegerField(default=0)
     def __str__(self):
         return self.choice_text
+    
+
+
+
+
+class TestImport(models.Model):
+    text = models.CharField(max_length=200)
+    number = models.IntegerField(default=0)
+    def __str__(self):
+        return self.text
+
