@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import Http404
 from .models import Question
 from django.urls import reverse
+from django.template import loader
 from django.views import generic
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
@@ -12,9 +13,22 @@ from .models import Choice, Question
 
 def index(request):
     latest_question_list = Question.objects.order_by("-pub_date")[:5]
+    # print("latest_question_list : ", latest_question_list)
     context = {"latest_question_list": latest_question_list}
+    # print("context : ", context)
     return render(request, "polls/index.html", context)
 
+
+def test(request):
+    templateHTML = loader.get_template("polls/testBlock.html")
+    return HttpResponse(templateHTML.render())
+
+
+
+def layout(request):
+    # templateHTML = loader.get_template("polls/layout/index.html")
+    # return HttpResponse(templateHTML.render())
+    return render(request, "polls/layout/index.html")
 
 class DetailView(generic.DetailView):
     model = Question

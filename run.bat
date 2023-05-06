@@ -1,3 +1,3 @@
-@echo off
-call cd mysite
-call python manage.py runserver
+
+cd mysite
+python manage.py runserver

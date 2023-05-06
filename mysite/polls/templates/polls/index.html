@@ -1,16 +1,23 @@
-{% load static %}
-
-<link rel="stylesheet" href="{% static 'polls/style.css' %}">
-
-<h1> HELLO CSS STATIC IN DJANGO </h1>
-
-
-{% if latest_question_list %}
-    <ul>
-    {% for question in latest_question_list %}
-        <li><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a></li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>No polls are available.</p>
-{% endif %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learn DJANGO</title>
+</head>
+<body style="margin: 0; padding: 0;">
+    <header style="background-color: aqua; margin: 0;padding: 0; height: 100px;"><h1 style="margin: 0; padding: 0;">Day la cai header chung</h1></header>
+    <div style="background-color: rgb(212, 206, 218); margin: 0;padding: 0; width: 250px; height: 100vh; position: fixed; left: 0; top: 100px;">
+        <ul>
+            <li><a href="{% url 'polls:testngu' %}"><h3>test</h3></a></li>
+            <li><a href="{% url 'polls:testLayout' %}"><h3>test layout</h3></a></li>
+        </ul>
+    </div>
+    <div class="main" style="margin-left: 250px; margin-top: 10px;">
+        {% block layout %}
+    
+        {% endblock %}
+    </div>
+</body>
+</html>
