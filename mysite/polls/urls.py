@@ -5,6 +5,7 @@ from . import views
 app_name = "polls"
 urlpatterns = [
     path("", views.index, name="index"),
+    path("home/", views.home, name="home"),
     path("test/", views.test, name="testngu"),
     path("testlayout/", views.layout, name="testLayout"),
      # ex: /polls/5/

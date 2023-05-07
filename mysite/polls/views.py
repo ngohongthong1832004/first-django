@@ -8,7 +8,12 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 
-from .models import Choice, Question
+from .models import Choice, Question, TestImport, ListStudent
+
+def home(request):
+    list_student = ListStudent.objects.all()
+    print("list_student : ", list_student)
+    return render(request, "polls/home.html", {"list_student": list_student})
 
 
 def index(request):
@@ -20,7 +25,7 @@ def index(request):
 
 
 def test(request):
-    templateHTML = loader.get_template("polls/testBlock.html")
+    templateHTML = loader.get_template("polls/add_student.html")
     return HttpResponse(templateHTML.render())
 
 

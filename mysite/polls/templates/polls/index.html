@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,13 +7,25 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Learn DJANGO</title>
+    <link rel="stylesheet" href="{% static 'polls/main.css' %}">
 </head>
 <body style="margin: 0; padding: 0;">
-    <header style="background-color: aqua; margin: 0;padding: 0; height: 100px;"><h1 style="margin: 0; padding: 0;">Day la cai header chung</h1></header>
-    <div style="background-color: rgb(212, 206, 218); margin: 0;padding: 0; width: 250px; height: 100vh; position: fixed; left: 0; top: 100px;">
+    <header style="background-color: aqua; margin: 0;padding: 0; height: 60px;">
+        <div style="display: flex; justify-content: space-between; padding: 0 30px;">
+            <h3 style="text-align: end; padding-right: 20px;">
+                <span class="title">Learn DJANGO</span>
+            </h3>
+            <h3 style="text-align: end; padding-right: 20px;">
+                <span >ten user</span>
+            </h3>
+        </div>
+    </header>
+    <div class="sidebar">
         <ul>
-            <li><a href="{% url 'polls:testngu' %}"><h3>test</h3></a></li>
-            <li><a href="{% url 'polls:testLayout' %}"><h3>test layout</h3></a></li>
+            <li><a href="{% url 'polls:home' %}"><h3>Home</h3></a></li>
+            <li><a href="{% url 'polls:testngu' %}"><h3>Add student</h3></a></li>
+            <li><a href="{% url 'polls:testLayout' %}"><h3>Search student</h3></a></li>
+            <li><a href="{% url 'polls:testLayout' %}"><h3>log out</h3></a></li>
         </ul>
     </div>
     <div class="main" style="margin-left: 250px; margin-top: 10px;">

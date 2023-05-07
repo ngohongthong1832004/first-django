@@ -1,0 +1,31 @@
+{% extends "./index.html"%}
+
+{% block layout %}
+    <h1 class="title-home">LIST STUDENT</h1>
+    <div class="wrap-item-student-home">
+        <table>
+            <tr>
+                <td>ID</td>
+                <td>First name</td>
+                <td>Last name</td>
+                <td>Age</td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+         {% for student in list_student %}
+            <tr>
+                <td>{{ student.id }}</td>
+                <td>{{ student.first_name }}</td>
+                <td>{{ student.last_name }}</td>
+                <td>{{ student.age }}</td>
+                <td><button class="btn" style="height: 100%; width: 100%; background-color: green; color : white;"><a>Detail</a></button></td>
+                <td><button class="btn" style="height: 100%; width: 100%; background-color: red; color : white;"><a>Delete</a></button></td>
+                <td><button class="btn" style="height: 100%; width: 100%; background-color: blue; color : white;"><a>Update</a></button></td>
+            </tr>
+        {% endfor %}
+          </table>
+       
+    </div>
+
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends "./index.html" %}
+{% load static %}
+{% block layout %}
+
+<link rel="stylesheet" href="{% static 'polls/form.css' %}">
+<h3 style="text-align: center;">FILL THIS FORM</h3>
+
+<div>
+  <form action="/action_page.php">
+    <label for="fname">First Name</label>
+    <input type="text" id="fname" name="firstname" placeholder="Your name..">
+
+    <label for="lname">Last Name</label>
+    <input type="text" id="lname" name="lastname" placeholder="Your last name..">
+
+    <label for="lname">Age</label>
+    <input type="text" id="age" name="age" placeholder="Your last name..">
+
+  
+    <button>Create</button>
+  </form>
+</div>
+{% endblock %}

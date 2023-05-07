@@ -1,0 +1,77 @@
+.main {
+    padding: 20px;
+}
+
+.title {
+    font-size: 25px;
+    color: red;
+}
+.sidebar {
+    border-radius:1px solid rgba(0 0 0 /80%) ;
+    background-color: rgb(230, 253, 246);
+    margin: 0;
+    padding: 0;
+    width: 250px;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 60px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    transition: all 0.3s;
+    z-index: 1000;
+}
+.sidebar ul {
+    list-style: none;
+    padding: 0%;
+}
+.sidebar li {
+    padding:0 20px;
+}
+.sidebar li a {
+    color: black;
+    text-decoration: none;
+    display: block;
+    padding: 0  20px;
+}
+.sidebar li a:hover {
+    transform: translateX(5px);
+    color: red;
+    background-color: rgb(188, 207, 202);
+    border-radius: 10px;
+}
+
+.title-home {
+    text-align: center;
+    color: black;
+}
+.wrap-item-student-home  table tr{
+    /* padding: 10px; */
+}
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  td, th {
+    border: 1px solid rgb(176, 221, 206);
+    text-align: left;
+    padding: 8px;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #dddddd;
+  }
+
+.btn {
+    border: none;
+    border-radius: 5px;
+}
+.btn:hover {
+    cursor: pointer;
+}
+.btn a {
+    display: block;
+    padding: 5px;
+}
