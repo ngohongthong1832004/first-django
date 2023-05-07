@@ -31,9 +31,7 @@ def test(request):
 
 
 def layout(request):
-    # templateHTML = loader.get_template("polls/layout/index.html")
-    # return HttpResponse(templateHTML.render())
-    return render(request, "polls/layout/index.html")
+    return render(request, "polls/search_student.html")
 
 class DetailView(generic.DetailView):
     model = Question

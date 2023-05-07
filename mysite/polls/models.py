@@ -18,10 +18,6 @@ class Choice(models.Model):
     def __str__(self):
         return self.choice_text
     
-
-
-
-
 class TestImport(models.Model):
     text = models.CharField(max_length=200)
     number = models.IntegerField(default=0)
@@ -30,11 +26,20 @@ class TestImport(models.Model):
     
 class ListStudent(models.Model):
     id = models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')
-    first_name = models.CharField(max_length=200, default='SOME STRING')
-    last_name = models.CharField(max_length=200, default='SOME STRING')
+    first_name = models.CharField(max_length=200)
+    last_name = models.CharField(max_length=200)
     age = models.IntegerField(default=0)
+    sex = models.CharField(max_length=200)
     def __str__(self): 
         return self.first_name
     @property
     def full_name(self):
         return f"{self.first_name} {self.last_name}"
+    
+
+class Testmigrate(models.Model):
+    text = models.CharField(max_length=200)
+    num = models.IntegerField(default=0)
+    def __str__(self):
+        return self.text
+
