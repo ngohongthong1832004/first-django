@@ -1,0 +1,49 @@
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+    background-color: rgb(88, 87, 87);
+}
+
+.wrap-form{
+    background-color: beige;
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 10px;
+    height: 300px;
+    width: 300px;
+}
+.wrap-form h1 {
+    text-align: center;
+}
+
+.group{
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0;
+    padding: 5px 0;
+}
+.group label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+.group input {
+    border-radius: 5px;
+    border: 1px solid rgb(163, 180, 180);
+    padding: 5px;
+    outline: none;
+}
+
+button {
+    width: 100%;
+    background-color: rgb(176, 176, 231);
+    border : none;
+    border-radius: 10px;
+    margin-top: 15px;
+    height: 40px;
+    font-size: 23px;
+}
+button:hover {
+    background-color: rgb(140, 140, 207);
+}

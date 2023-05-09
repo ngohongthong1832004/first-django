@@ -1,3 +1,5 @@
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render
 from django.http import Http404
 from .models import Question
@@ -10,22 +12,52 @@ from .forms import *
 
 from .models import Choice, Question, TestImport, ListStudent
 
+def Login(request):
+
+    if request.method == "POST":
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data["username"]
+            password = form.cleaned_data["password"]
+
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                # A backend authenticated the credentials
+                print("A backend authenticated the credentials")
+                print("user name : ", user.get_full_name())
+                username = user.get_full_name()
+                login(request, user)
+                return HttpResponseRedirect("/home",{"user",username})
+                # login(request, user)
+            else:
+                # No backend authenticated the credentials
+                print("No backend authenticated the credentials")
+    else:
+        form = LoginForm()
+
+    return render(request, "polls/login.html", {"form": form})
+
+def Logout (request):
+    logout(request)
+    return HttpResponseRedirect("/login")
+
+@login_required(login_url="/login")
 def home(request):
     list_student = ListStudent.objects.all()
     print("list_student : ", list_student)
     return render(request, "polls/home.html", {"list_student": list_student})
-
+@login_required(login_url="/login")
 def detail_student(request, id_student):
     student = ListStudent.objects.get(pk=id_student)
     # print("student : ", student.first_name)
     return render(request, "polls/detail_student.html", {"student": student})
-
+@login_required(login_url="/login")
 def delete_student(request, id_student):
     student = ListStudent.objects.get(pk=id_student)
     student.delete()
     # print("student : ", student.first_name)
     return HttpResponseRedirect("/home")
-
+@login_required(login_url="/login")
 def update_student(request, id_student):
     student = ListStudent.objects.get(pk=id_student)
     if request.method == "POST":
@@ -41,7 +73,7 @@ def update_student(request, id_student):
     # print("student : ", student.first_name)
     return render(request, "polls/update_student.html", {"form": form})
 
-
+@login_required(login_url="/login")
 def char(request, my_char):
     print("my_char : ", my_char)
     return HttpResponse(my_char)
@@ -52,7 +84,7 @@ class char2(generic.DetailView):
         print("testel : ", testel)
         return kwargs.my_char
 
-
+@login_required(login_url="/login")
 def index(request):
     latest_question_list = Question.objects.order_by("-pub_date")[:5]
     # print("latest_question_list : ", latest_question_list)
@@ -60,14 +92,14 @@ def index(request):
     # print("context : ", context)
     return render(request, "polls/index.html", context)
 
-
+@login_required(login_url="/login")
 def test(request):
     templateHTML = loader.get_template("polls/add_student.html")
     return HttpResponse(templateHTML.render())
-
+@login_required(login_url="/login")
 def submit (request):
     return HttpResponse("Submit : ")
-
+@login_required(login_url="/login")
 def layout(request):
     return render(request, "polls/search_student.html")
 
@@ -75,11 +107,11 @@ class DetailView(generic.DetailView):
     model = Question
     template_name = "polls/detail.html"
 
-
+@login_required(login_url="/login")
 def results(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
     return render(request, "polls/results.html", {"question": question})
-
+@login_required(login_url="/login")
 def vote(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
     try:
@@ -102,7 +134,7 @@ def vote(request, question_id):
         # user hits the Back button.
         return HttpResponseRedirect(reverse("polls:results", args=(question.id,)))
 
-
+@login_required(login_url="/login")
 def get_name(request):
     # if this is a POST request we need to process the form data
     if request.method == "POST":
@@ -125,7 +157,7 @@ def get_name(request):
         form = NameForm()
 
     return render(request, "polls/add_student.html", {"form": form})
-
+@login_required(login_url="/login")
 def search_student(request):
     if request.method =="POST" :
         form = SearchForm(request.POST)
