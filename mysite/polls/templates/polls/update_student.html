@@ -3,20 +3,20 @@
 {% block layout %}
 
 <link rel="stylesheet" href="{% static 'polls/form.css' %}">
-<h3 style="text-align: center;">FILL THIS FORM</h3>
+<h3 style="text-align: center;">EIDT FORM</h3>
 
 <div>
   <form action="" method="POST">
     {% csrf_token %}    
     <label for="fname">First Name</label>
-    {{ form.your_name }}
+    {{ form.first_name }}
 
     <label for="lname">Last Name</label>
-    {{ form.bio }}
+    {{ form.last_name }}
 
 
     <label for="lname">Age</label>
-    {{ form.your_age }}
+    {{ form.age }}
 
     <!-- <label for="lname">Male</label>
     <input type="radio" id="sex" name="sex" checked value="male">
@@ -24,7 +24,7 @@
     <label for="lname">Female</label>
     <input type="radio" id="sex" name="sex" value="female"> -->
 
-    <button>Create</button>
+    <button>UPDATE</button>
   </form>
 </div>
 {% endblock %}

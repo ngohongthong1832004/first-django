@@ -1,12 +1,12 @@
 from django.shortcuts import render
 from django.http import Http404
 from .models import Question
-from django.urls import reverse
 from django.template import loader
 from django.views import generic
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
+from .forms import *
 
 from .models import Choice, Question, TestImport, ListStudent
 
@@ -14,6 +14,43 @@ def home(request):
     list_student = ListStudent.objects.all()
     print("list_student : ", list_student)
     return render(request, "polls/home.html", {"list_student": list_student})
+
+def detail_student(request, id_student):
+    student = ListStudent.objects.get(pk=id_student)
+    # print("student : ", student.first_name)
+    return render(request, "polls/detail_student.html", {"student": student})
+
+def delete_student(request, id_student):
+    student = ListStudent.objects.get(pk=id_student)
+    student.delete()
+    # print("student : ", student.first_name)
+    return HttpResponseRedirect("/home")
+
+def update_student(request, id_student):
+    student = ListStudent.objects.get(pk=id_student)
+    if request.method == "POST":
+        form = UpdateForm(request.POST)
+        if form.is_valid():
+            student.first_name = form.cleaned_data["first_name"]
+            student.last_name = form.cleaned_data["last_name"]
+            student.age = form.cleaned_data["age"]
+            student.save()
+            return HttpResponseRedirect("/home")
+    else:
+        form = UpdateForm(initial={"first_name": student.first_name, "last_name": student.last_name, "age": student.age})
+    # print("student : ", student.first_name)
+    return render(request, "polls/update_student.html", {"form": form})
+
+
+def char(request, my_char):
+    print("my_char : ", my_char)
+    return HttpResponse(my_char)
+
+class char2(generic.DetailView):
+    def __str__(self, **kwargs):
+        testel = kwargs.get("my_char")
+        print("testel : ", testel)
+        return kwargs.my_char
 
 
 def index(request):
@@ -28,7 +65,8 @@ def test(request):
     templateHTML = loader.get_template("polls/add_student.html")
     return HttpResponse(templateHTML.render())
 
-
+def submit (request):
+    return HttpResponse("Submit : ")
 
 def layout(request):
     return render(request, "polls/search_student.html")
@@ -63,3 +101,46 @@ def vote(request, question_id):
         # with POST data. This prevents data from being posted twice if a
         # user hits the Back button.
         return HttpResponseRedirect(reverse("polls:results", args=(question.id,)))
+
+
+def get_name(request):
+    # if this is a POST request we need to process the form data
+    if request.method == "POST":
+        # create a form instance and populate it with data from the request:
+        form = NameForm(request.POST)
+        # check whether it's valid:
+        if form.is_valid():
+            # process the data in form.cleaned_data as required
+            first_name = form.cleaned_data["your_name"]
+            last_name = form.cleaned_data["bio"]
+            your_age = form.cleaned_data["your_age"]
+            # ...
+            # redirect to a new URL:
+            add_new_user = ListStudent.objects.create(first_name=first_name, last_name=last_name, age=your_age)
+            add_new_user.save()
+            return HttpResponseRedirect("/home/")
+
+    # if a GET (or any other method) we'll create a blank form
+    else:
+        form = NameForm()
+
+    return render(request, "polls/add_student.html", {"form": form})
+
+def search_student(request):
+    if request.method =="POST" :
+        form = SearchForm(request.POST)
+
+        if form.is_valid():
+            search_text = form.cleaned_data["search_name"]
+
+            list_student = ListStudent.objects.filter(last_name__contains=search_text)
+            return render(request, "polls/search_student.html", {"list_student" : list_student, "form" : form, "search_text" : search_text })
+    else:
+        form = SearchForm()
+        # print("form-else : ", form)
+
+
+    return render(request, "polls/search_student.html", {"form" : form })
+
+
+    

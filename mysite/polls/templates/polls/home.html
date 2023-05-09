@@ -9,6 +9,7 @@
                 <td>First name</td>
                 <td>Last name</td>
                 <td>Age</td>
+                <!-- <td>Sex</td> -->
                 <td></td>
                 <td></td>
                 <td></td>
@@ -19,9 +20,10 @@
                 <td>{{ student.first_name }}</td>
                 <td>{{ student.last_name }}</td>
                 <td>{{ student.age }}</td>
-                <td><button class="btn" style="height: 100%; width: 100%; background-color: green; color : white;"><a>Detail</a></button></td>
-                <td><button class="btn" style="height: 100%; width: 100%; background-color: red; color : white;"><a>Delete</a></button></td>
-                <td><button class="btn" style="height: 100%; width: 100%; background-color: blue; color : white;"><a>Update</a></button></td>
+                <!-- <td>{{ student.sex }}</td> -->
+                <td><button class="btn" style="height: 100%; width: 100%; background-color: green; color : white;"><a href="{% url 'polls:detail_student' student.id %}">Detail</a></button></td>
+                <td><button class="btn" style="height: 100%; width: 100%; background-color: red; color : white;"><a href="{% url 'polls:delete_student' student.id %}" >Delete</a></button></td>
+                <td><button class="btn" style="height: 100%; width: 100%; background-color: blue; color : white;"><a  href="{% url 'polls:update_student' student.id %}" >Update</a></button></td>
             </tr>
         {% endfor %}
           </table>

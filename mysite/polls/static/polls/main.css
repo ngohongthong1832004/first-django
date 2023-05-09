@@ -78,3 +78,7 @@ table {
     display: block;
     padding: 5px;
 }
+td button a {
+    color: white;
+    text-decoration: none;
+}
