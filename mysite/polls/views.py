@@ -90,7 +90,8 @@ def index(request):
     # print("latest_question_list : ", latest_question_list)
     context = {"latest_question_list": latest_question_list}
     # print("context : ", context)
-    return render(request, "polls/index.html", context)
+    return HttpResponseRedirect('/home')
+    # return render(request, "polls/index.html", context)
 
 @login_required(login_url="/login")
 def test(request):
